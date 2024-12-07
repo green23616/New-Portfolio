@@ -9,21 +9,20 @@ import Card from './components/Card';
 
 function Main() {
   const isDark = useRecoilValue(darkState);
-
   return (
     <div className={styles.main}>
       <div
         className={`${styles.container} ${isDark ? styles.dark : styles.light}`}
       >
         <div className={styles.container__left}>
-          <Card title="Photos" />
-          <Card title="Comments" />
+          <Card title="Photos" page="photos" />
+          <Card title="Study" page="study" />
         </div>
         <div className={styles.container__right}>
-          <Card title="Story" />
-          <Card title="Skills" />
-          <Card title="Works" />
-          <Card title="Music" />
+          <Card title="Skills" page="skills" />
+          <Card title="Works" page="works" />
+          <Card title="Story" page="story" />
+          <Card title="Music" page="music" />
         </div>
         <Darkmode />
       </div>
