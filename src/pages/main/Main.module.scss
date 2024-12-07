@@ -1,0 +1,37 @@
+.main {
+  @include mixin-flex(center);
+
+  width: 100%;
+  height: 100vh;
+
+  .container {
+    @include mixin-flex(space-around);
+    position: relative;
+
+    width: 1200px;
+    height: 800px;
+
+    background-color: var(--background-color);
+
+    &__left {
+      @include mixin-flex(center);
+      flex-direction: column;
+
+      width: 50%;
+
+      gap: 20px;
+      row-gap: 20px;
+
+      transition: all 0.18s ease-in-out;
+    }
+    &__right {
+      @include mixin-flex(center);
+      flex-wrap: wrap;
+
+      width: 70%;
+
+      gap: 20px;
+      row-gap: 20px;
+    }
+  }
+}

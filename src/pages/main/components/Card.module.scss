@@ -1,0 +1,20 @@
+.card {
+  @include mixin-flex(center);
+
+  width: 280px;
+  height: 280px;
+
+  border-radius: 3px;
+
+  background-color: var(--box-background-color);
+
+  transition: all 0.18s ease-in-out;
+
+  cursor: pointer;
+
+  &:hover {
+    scale: 1.06;
+    background-color: var(--box-hover-background-color);
+    border-radius: 10px;
+  }
+}

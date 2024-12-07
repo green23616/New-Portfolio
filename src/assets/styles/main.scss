@@ -1,0 +1,29 @@
+@import './font.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+}
+
+@mixin mixin-flex($justify) {
+  display: flex;
+  justify-content: $justify;
+  align-items: center;
+}
+
+:root {
+  --background-color: #88d7f3;
+  --box-background-color: rgb(44, 246, 132);
+  --box-hover-background-color: rgb(224, 249, 88);
+  --button-text-color: rgb(0, 0, 0);
+}
+
+.dark {
+  --background-color: #252626;
+  --box-background-color: #6d6c6c;
+  --box-hover-background-color: #b7b7b7;
+  --button-text-color: white;
+}
