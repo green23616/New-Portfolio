@@ -4,7 +4,7 @@
 
 - React 18.3.1 + Typescript with Vite
 - React Router
-- Recoil + Tanstack Query v5
+- Recoil + Tanstack Query v5 + Axios
 - SCSS + Framer Motion
 - Supabase
 
@@ -14,6 +14,7 @@
 - useTransition 활용
 - React.lazy와 Suspense 활용
 - Composition Component 숙지
+- lodash를 활용한 Throttle과 debounce 사용
 
 ## 과정
 
@@ -28,14 +29,23 @@
 2. **과정**
 
 - 초기세팅을 Git Clone받아 시작. 일단 Routing부터. npm i react-router
-- Recoil, Tanstack Query같은건 Starter pack에 미리 세팅. npm i recoil
+- Recoil, Tanstack Query같은건 Starter pack에 미리 세팅. npm i recoil npm i @tanstack/react-query
 - Framer motion 적용 npm i motion
-- SCSS와 Recoil을 활용해 Darkmode 구현
+- Google Material Icon 사용 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+- SCSS와 Recoil로 Darkmode 구현
 
 - Photos 시작
-- HTML, CSS 시작
-  <진행중>
-- React Query v5로 가져오기 npm i @tanstack/react-query
+- 페이지 최상단 이동 버튼 구현
+  - Scroll event 발생 시 render 발생. 브라우저 스크롤 위치값 저장에 useRef를 사용해 불필요한 Render 개선.
+  - Scroll event에 throttle 사용. npm install lodash
+- React Query v5로 data fetch
+
+  - Tanstack query Devtools 사용 npm i @tanstack/react-query-devtools
+  - 무한스크롤 구현
+  - Axios로 fetch
+
+- 임시로 준 60vh 제거 New-Portfolio\src\pages\photos\components\main\Main.module.scss
 
 3. **QnA**
 
@@ -46,3 +56,5 @@
 ## 회고
 
 - Git push 습관들이기
+- Scroll event 발생 시 render 발생. 브라우저 스크롤 위치값 저장에 useRef를 사용해 불필요한 Render 개선.
+- React Intersection Observer 사용해보기

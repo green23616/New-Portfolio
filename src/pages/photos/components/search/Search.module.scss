@@ -1,0 +1,10 @@
+.search {
+  font-size: 26px;
+  cursor: pointer;
+
+  transition: 0.1s linear;
+
+  &:hover {
+    scale: 1.2;
+  }
+}

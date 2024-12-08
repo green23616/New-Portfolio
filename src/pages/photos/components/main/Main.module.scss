@@ -1,0 +1,21 @@
+.main {
+  @include mixin-flex(center);
+
+  width: 100%;
+  min-height: 90vh;
+
+  border-bottom: 1px solid #e6e6e6;
+
+  .container {
+    @include mixin-flex(start);
+    flex-wrap: wrap;
+
+    width: 1200px;
+
+    gap: 20px;
+    row-gap: 20px;
+
+    padding: 50px;
+    margin-left: 20px;
+  }
+}

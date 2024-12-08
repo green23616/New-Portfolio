@@ -1,0 +1,19 @@
+.up {
+  position: fixed;
+  right: 50px;
+  bottom: 60px;
+
+  font-size: 50px;
+
+  transition: all 0.1s linear;
+
+  &.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &.inactive {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+}
