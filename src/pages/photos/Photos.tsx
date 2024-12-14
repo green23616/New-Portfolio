@@ -1,10 +1,15 @@
 // CSS
+import { useEffect } from 'react';
 import styles from './Photos.module.scss';
 import Main from './components/main/Main';
 // Components
 import Navigation from './components/navigation/Navigation';
 
 function Photos() {
+  useEffect(() => {
+    console.log('Mount');
+    return () => console.log('Unmount');
+  });
   return (
     <div className={styles.photos}>
       <div className={styles.container}>

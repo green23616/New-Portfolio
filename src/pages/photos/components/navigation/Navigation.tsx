@@ -2,12 +2,19 @@ import { useSetRecoilState } from 'recoil';
 import Search from '../search/Search';
 import styles from './Navigation.module.scss';
 import { searchState } from '../../../../store/atoms/searchState';
+import { useState } from 'react';
 
 function Navigation() {
   const setSearch = useSetRecoilState(searchState);
 
+  const [likePage, setLikePage] = useState(false);
+
   const handleClick = (paths: string) => {
     setSearch(paths);
+  };
+
+  const handleMouseOver = () => {
+    setLikePage(true);
   };
 
   return (
@@ -44,6 +51,16 @@ function Navigation() {
           Book
         </li>
         <Search />
+        <div
+          className={'material-symbols-outlined'}
+          style={{ color: 'red' }}
+          onMouseOver={handleMouseOver}
+        >
+          favorite
+        </div>
+        {likePage && (
+          <div className={styles.navigation__ul__likePage}>나야</div>
+        )}
       </ul>
     </nav>
   );

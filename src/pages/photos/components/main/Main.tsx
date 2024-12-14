@@ -17,6 +17,7 @@ import Detail from '../detail/Detail';
 function Main() {
   const searchValue = useRecoilValue(searchState);
   const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState({});
 
   const API_URL = 'https://api.unsplash.com/search/photos';
   const API_KEY = 'Client-ID pAEouZcfIjwAylXEegT3seeJ5uAtN9-lmD29z0VLQIw';
@@ -54,14 +55,16 @@ function Main() {
           data.results.map((e: Photo) => {
             return (
               <Card
+                data={e}
                 key={e.id}
                 src={e.urls.regular}
                 id={e.id}
                 setIsOpen={setIsOpen}
+                setSelected={setSelected}
               />
             );
           })}
-        {isOpen && <Detail />}
+        {isOpen && <Detail setIsOpen={setIsOpen} selected={selected} />}
         <Up />
       </div>
     </main>

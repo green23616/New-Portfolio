@@ -10,11 +10,19 @@
 
     @include mixin-flex(space-around);
 
+    position: relative;
+
     &__li {
       font-size: 18px;
       font-weight: 500;
 
       cursor: pointer;
+    }
+
+    &__likePage {
+      position: absolute;
+      right: 0;
+      top: 0;
     }
   }
 }
