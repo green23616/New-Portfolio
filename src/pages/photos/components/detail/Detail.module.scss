@@ -15,7 +15,9 @@
   background-color: rgba(black, 0.5);
 
   .container {
-    width: 30%;
+    position: relative;
+
+    width: 31%;
     height: 700px;
 
     background-color: white;
@@ -33,6 +35,9 @@
       padding: 30px 10px 30px;
 
       border-bottom: 1px solid #e6e6e6;
+
+      -webkit-user-drag: none;
+      user-select: none;
 
       &__close {
         display: block;
@@ -90,7 +95,7 @@
           margin-bottom: 20px;
         }
         h3 {
-          padding-bottom: 6px;
+          margin-bottom: 20px;
         }
       }
     }

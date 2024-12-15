@@ -1,20 +1,24 @@
 // CSS
-import { useEffect } from 'react';
 import styles from './Photos.module.scss';
 import Main from './components/main/Main';
 // Components
 import Navigation from './components/navigation/Navigation';
+// Recoil
+import { useSetRecoilState } from 'recoil';
+import { searchState } from '../../store/atoms/searchState';
 
 function Photos() {
-  useEffect(() => {
-    console.log('Mount');
-    return () => console.log('Unmount');
-  });
+  const setSearch = useSetRecoilState(searchState);
+
+  const handleClick = (paths: string) => {
+    setSearch(paths);
+  };
+
   return (
     <div className={styles.photos}>
       <div className={styles.container}>
         <header className={styles.container__header}>
-          <h1>La Galleria</h1>
+          <h1 onClick={() => handleClick('fruit')}>La Galleria</h1>
         </header>
         <Navigation />
         <Main />

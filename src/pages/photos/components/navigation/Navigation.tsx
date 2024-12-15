@@ -1,22 +1,27 @@
-import { useSetRecoilState } from 'recoil';
-import Search from '../search/Search';
+// CSS
 import styles from './Navigation.module.scss';
+// Component
+import Search from '../search/Search';
+import SideNav from '../sidenav/SideNav';
+// Recoil
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { searchState } from '../../../../store/atoms/searchState';
-import { useState } from 'react';
+import { likeState } from '../../../../store/atoms/likeState';
+import { storageState } from '../../../../store/atoms/storageState';
 
 function Navigation() {
   const setSearch = useSetRecoilState(searchState);
 
-  const [likePage, setLikePage] = useState(false);
+  const [likePage, setLikePage] = useRecoilState(likeState);
+  const localLikes = useRecoilValue(storageState);
 
   const handleClick = (paths: string) => {
     setSearch(paths);
   };
 
   const handleMouseOver = () => {
-    setLikePage(true);
+    setLikePage(prev => !prev);
   };
-
   return (
     <nav className={styles.navigation}>
       <ul className={styles.navigation__ul}>
@@ -52,15 +57,15 @@ function Navigation() {
         </li>
         <Search />
         <div
-          className={'material-symbols-outlined'}
-          style={{ color: 'red' }}
-          onMouseOver={handleMouseOver}
+          className={`${'material-symbols-outlined'} ${
+            styles.navigation__ul__likes
+          }`}
+          onClick={handleMouseOver}
         >
           favorite
+          <span className={styles.likeslength}>x {localLikes.length}</span>
         </div>
-        {likePage && (
-          <div className={styles.navigation__ul__likePage}>나야</div>
-        )}
+        {likePage && <SideNav />}
       </ul>
     </nav>
   );

@@ -1,0 +1,48 @@
+.toast {
+  @include mixin-flex(center);
+
+  position: absolute;
+
+  width: 400px;
+  height: 60px;
+
+  z-index: 100;
+
+  -webkit-user-drag: none;
+  user-select: none;
+
+  .container {
+    @include mixin-flex(center);
+
+    width: 80%;
+    height: 100%;
+
+    background-color: #f8f8f8;
+    border: 1px solid #ededed;
+    border-radius: 5px;
+
+    &__main {
+      @include mixin-flex(start);
+
+      width: 90%;
+      height: 100%;
+
+      border-radius: 5px;
+
+      &__status {
+        display: inline-block;
+        padding: 14px;
+      }
+      &__message {
+        h2 {
+          font-size: 18px;
+          font-weight: 500;
+        }
+        h4 {
+          font-size: 14px;
+          font-weight: 300;
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
+// CSS
 import styles from './Detail.module.scss';
+// Types
 import Photo from '../../../../types/CardType';
+// Component
+import Toast from '../../../../components/common/toast/Toast';
+// Recoil
+import { useRecoilState } from 'recoil';
+import { storageState } from '../../../../store/atoms/storageState';
 
 interface detailProps {
   setIsOpen: (value: boolean) => void;
@@ -8,13 +15,16 @@ interface detailProps {
 }
 
 function Detail({ setIsOpen, selected }: detailProps) {
+  console.log(selected);
   const [likes, setLikes] = useState(false);
+  const [toast, setToast] = useState(false);
+  const [result, setResult] = useState(0);
+  const [localLikes, setLocalLikes] = useRecoilState(storageState);
 
   useEffect(() => {
-    const likes = JSON.parse(localStorage.getItem('likes') || '[]');
-    const isLiked = likes.some((item: Photo) => item.id === selected.id);
+    const isLiked = localLikes.some((item: Photo) => item.id === selected.id);
     setLikes(isLiked);
-  }, [selected]);
+  }, [selected, localLikes]);
 
   useEffect(() => {
     const handleKeydown = (event: KeyboardEvent) => {
@@ -29,16 +39,24 @@ function Detail({ setIsOpen, selected }: detailProps) {
   }, [setIsOpen]);
 
   const handleClick = () => {
-    const likes = JSON.parse(localStorage.getItem('likes') || '[]');
-    const alreadyIn = likes.some((item: Photo) => item.id === selected.id);
+    const alreadyIn = localLikes.some((item: Photo) => item.id === selected.id);
 
     if (!alreadyIn) {
-      const newLikes = [...likes, selected];
+      const newLikes = [...localLikes, selected];
       localStorage.setItem('likes', JSON.stringify(newLikes));
+      setLocalLikes(newLikes); // Recoil 상태 업데이트
       setLikes(true);
-      console.log('added');
+      setToast(true);
+      setResult(1);
     } else {
-      console.log('Item is already in LocalStorage');
+      const newLikes = localLikes.filter(
+        (item: Photo) => item.id !== selected.id,
+      );
+      localStorage.setItem('likes', JSON.stringify(newLikes));
+      setLocalLikes(newLikes); // Recoil 상태 업데이트
+      setLikes(false);
+      setToast(true);
+      setResult(0);
     }
   };
 
@@ -69,7 +87,9 @@ function Detail({ setIsOpen, selected }: detailProps) {
                   styles.container__header__close
                 }`}
                 onClick={handleClick}
-                style={{ color: 'red' }}
+                style={{
+                  color: 'red',
+                }}
               >
                 favorite
               </p>
@@ -93,11 +113,22 @@ function Detail({ setIsOpen, selected }: detailProps) {
           />
           <div className={styles.container__main__desc}>
             <h2>{selected.alt_description}</h2>
-            <h3>{selected.created_at.split('T')[0]}</h3>
             <h3>{selected.likes} Likes</h3>
+            <h3>{selected.created_at.split('T')[0]}</h3>
           </div>
         </div>
       </div>
+      {toast && (
+        <Toast
+          toast={toast}
+          setToast={setToast}
+          message={
+            likes ? 'Likes에 추가되었습니다' : 'Likes에서 삭제되었습니다'
+          }
+          bottom={160}
+          result={result}
+        />
+      )}
     </div>
   );
 }
