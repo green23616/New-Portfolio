@@ -6,23 +6,23 @@ import Photo from '../../../../types/CardType';
 // Component
 import Toast from '../../../../components/common/toast/Toast';
 // Recoil
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { storageState } from '../../../../store/atoms/storageState';
+import {
+  detailState,
+  selectedState,
+} from '../../../../store/atoms/detailState';
 
-interface detailProps {
-  setIsOpen: (value: boolean) => void;
-  selected: Photo;
-}
-
-function Detail({ setIsOpen, selected }: detailProps) {
-  console.log(selected);
+function Detail() {
   const [likes, setLikes] = useState(false);
   const [toast, setToast] = useState(false);
   const [result, setResult] = useState(0);
   const [localLikes, setLocalLikes] = useRecoilState(storageState);
+  const setIsOpen = useSetRecoilState(detailState);
+  const selected = useRecoilValue(selectedState);
 
   useEffect(() => {
-    const isLiked = localLikes.some((item: Photo) => item.id === selected.id);
+    const isLiked = localLikes.some((item: Photo) => item.id === selected?.id);
     setLikes(isLiked);
   }, [selected, localLikes]);
 
@@ -39,21 +39,23 @@ function Detail({ setIsOpen, selected }: detailProps) {
   }, [setIsOpen]);
 
   const handleClick = () => {
-    const alreadyIn = localLikes.some((item: Photo) => item.id === selected.id);
+    const alreadyIn = localLikes.some(
+      (item: Photo) => item.id === selected?.id,
+    );
 
     if (!alreadyIn) {
       const newLikes = [...localLikes, selected];
       localStorage.setItem('likes', JSON.stringify(newLikes));
-      setLocalLikes(newLikes); // Recoil 상태 업데이트
+      setLocalLikes(newLikes);
       setLikes(true);
       setToast(true);
       setResult(1);
     } else {
       const newLikes = localLikes.filter(
-        (item: Photo) => item.id !== selected.id,
+        (item: Photo) => item.id !== selected?.id,
       );
       localStorage.setItem('likes', JSON.stringify(newLikes));
-      setLocalLikes(newLikes); // Recoil 상태 업데이트
+      setLocalLikes(newLikes);
       setLikes(false);
       setToast(true);
       setResult(0);
@@ -74,11 +76,11 @@ function Detail({ setIsOpen, selected }: detailProps) {
           </p>
           <div className={styles.container__header__profileBox}>
             <img
-              src={selected.user.profile_image.small}
+              src={selected?.user.profile_image.small}
               alt="profile"
               className={styles.profileImg}
             />
-            <p className={styles.profileName}>{selected.user.username}</p>
+            <p className={styles.profileName}>{selected?.user.username}</p>
           </div>
           <div className={styles.container__header__menu}>
             {likes ? (
@@ -108,13 +110,13 @@ function Detail({ setIsOpen, selected }: detailProps) {
         <div className={styles.container__main}>
           <img
             className={styles.container__main__img}
-            src={selected.urls.small}
+            src={selected?.urls.small}
             alt="img"
           />
           <div className={styles.container__main__desc}>
-            <h2>{selected.alt_description}</h2>
-            <h3>{selected.likes} Likes</h3>
-            <h3>{selected.created_at.split('T')[0]}</h3>
+            <h2>{selected?.alt_description}</h2>
+            <h3>{selected?.likes} Likes</h3>
+            <h3>{selected?.created_at.split('T')[0]}</h3>
           </div>
         </div>
       </div>

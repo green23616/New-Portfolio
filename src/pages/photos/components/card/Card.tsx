@@ -1,28 +1,30 @@
-import { useSetRecoilState } from 'recoil';
-import Photo from '../../../../types/CardType';
+// CSS
 import styles from './Card.module.scss';
-import { likeState } from '../../../../store/atoms/likeState';
+// Type
+import Photo from '../../../../types/CardType';
+// Recoil
+import { useSetRecoilState } from 'recoil';
+import {
+  detailState,
+  selectedState,
+} from '../../../../store/atoms/detailState';
 
 interface CardProps {
   data: Photo;
-  src: string;
-  id: string;
-  setIsOpen: (value: boolean) => void;
-  setSelected: (value: Photo) => void;
 }
 
-function Card({ data, src, id, setIsOpen, setSelected }: CardProps) {
-  const setLikePage = useSetRecoilState(likeState);
+function Card({ data }: CardProps) {
+  const setIsOpen = useSetRecoilState(detailState);
+  const setSelected = useSetRecoilState(selectedState);
 
   const handleClick = () => {
     setIsOpen(true);
     setSelected(data);
-    setLikePage(false);
   };
 
   return (
     <div className={styles.card} onClick={handleClick}>
-      <img src={src} alt={id} />
+      <img src={data.urls.small} alt={data.id} />
     </div>
   );
 }

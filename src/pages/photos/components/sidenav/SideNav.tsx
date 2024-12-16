@@ -1,13 +1,13 @@
 // CSS
 import styles from './SideNav.module.scss';
 // Types
-import Photo from '../../../../types/CardType';
+import Photo from '../../../../types/CardType.ts';
 // Recoil
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { likeState } from '../../../../store/atoms/likeState';
-import { storageState } from '../../../../store/atoms/storageState';
+import { likeState } from '../../../../store/atoms/likeState.ts';
+import { storageState } from '../../../../store/atoms/storageState.ts';
 // Component
-import Card from '../sidenav/card/Card.tsx';
+import Card from './card/Card.tsx';
 
 function SideNav() {
   const setLikePage = useSetRecoilState(likeState);
@@ -34,24 +34,9 @@ function SideNav() {
           Like list
         </h2>
         {localLikes.length < 1
-          ? '사진에 좋아요 를 눌러보세요'
+          ? '사진에 좋아요를 눌러보세요'
           : localLikes.map((like: Photo) => {
-              return (
-                <Card like={like} />
-                // <div
-                //   className={styles.container__main}
-                //   key={like.id}
-                // >
-                //   <img
-                //     className={styles.container__main__img}
-                //     src={like.urls.small}
-                //     alt={like.id}
-                //   />
-                //   <h3 className={styles.container__main__desc}>
-                //     {like.alt_description}
-                //   </h3>
-                // </div>
-              );
+              return <Card like={like} key={like.id} />;
             })}
       </div>
     </div>

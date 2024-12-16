@@ -8,3 +8,25 @@
     scale: 1.2;
   }
 }
+
+.searchBar {
+  display: none;
+
+  border: 1px solid white;
+
+  &.active {
+    display: block;
+
+    width: 180px;
+    height: 26px;
+
+    color: #000;
+
+    outline: none;
+
+    border-radius: 5px;
+    border: 1px solid rgb(135, 135, 135);
+  }
+  &:focus{
+  }
+}

@@ -1,23 +1,32 @@
-import axios from 'axios';
+import { useState } from 'react';
+import Bookmark from '../navigation/Bookmark.json';
 // CSS
 import styles from './Main.module.scss';
+// Type
+import Photo from '../../../../types/CardType';
 // Components
 import Up from '../../../../components/common/up/Up';
 import Card from '../card/Card';
-// Tanstack Query
-import { useQuery } from '@tanstack/react-query';
-// Recoil
-import { useRecoilValue } from 'recoil';
-import { searchState } from '../../../../store/atoms/searchState';
-// Type
-import Photo from '../../../../types/CardType';
-import { useState } from 'react';
 import Detail from '../detail/Detail';
+// Tanstack Query + axios
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+// Recoil
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { detailState } from '../../../../store/atoms/detailState';
+import { searchState } from '../../../../store/atoms/searchState';
+import { bookmarkState } from '../../../../store/atoms/bookmarkState';
 
 function Main() {
   const searchValue = useRecoilValue(searchState);
-  const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState({});
+  const isOpen = useRecoilValue(detailState);
+  const setBookmarkArr = useSetRecoilState(bookmarkState);
+
+  const handleClick = () => {
+    setBookmarkArr(prev => {
+      return [...prev, { path: searchValue }];
+    });
+  };
 
   const API_URL = 'https://api.unsplash.com/search/photos';
   const API_KEY = 'Client-ID pAEouZcfIjwAylXEegT3seeJ5uAtN9-lmD29z0VLQIw';
@@ -48,23 +57,25 @@ function Main() {
 
   return (
     <main className={styles.main}>
+      <div className={styles.searchInfo}>
+        <h2>{searchValue}에 대한 검색결과</h2>
+        <div
+          className={`${'material-symbols-outlined'} ${
+            styles.searchInfo__addBtn
+          }`}
+          onClick={handleClick}
+        >
+          bookmarks
+        </div>
+      </div>
       <div className={styles.container}>
         {isLoading && <p>Loading</p>}
         {isError && <p>Error</p>}
         {data &&
           data.results.map((e: Photo) => {
-            return (
-              <Card
-                data={e}
-                key={e.id}
-                src={e.urls.regular}
-                id={e.id}
-                setIsOpen={setIsOpen}
-                setSelected={setSelected}
-              />
-            );
+            return <Card data={e} key={e.id} />;
           })}
-        {isOpen && <Detail setIsOpen={setIsOpen} selected={selected} />}
+        {isOpen && <Detail />}
         <Up />
       </div>
     </main>
