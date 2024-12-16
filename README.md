@@ -32,7 +32,7 @@
 - Framer motion 적용 npm i motion
 - Google Material Icon 사용 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 
-<Photos/>
+Photos/
 
 - 페이지 최상단 이동 버튼 구현
   - Scroll event 발생 시 render 발생. 브라우저 스크롤 위치값 저장에 useRef를 사용해 불필요한 Render 개선.
@@ -40,16 +40,16 @@
   - 임시로 준 60vh 제거 New-Portfolio\src\pages\photos\components\main\Main.module.scss
 - SCSS와 Recoil로 Darkmode 구현
 
-<Detail/>
+Detail/
 
-- <Detail/>에서 like 버튼 클릭 시 localStorage에 추가하는 기능 구현
+- Detail/에서 like 버튼 클릭 시 localStorage에 추가하는 기능 구현
 - 한번 더 클릭 시 localStorage에서 제거하는 기능 필요
-- Likes 페이지 활성화, <Detail/> 활성화 상태에서 Likes 버튼 추가 시 localStorage 실시간 반영되지 않음
+- Likes 페이지 활성화, Detail/ 활성화 상태에서 Likes 버튼 추가 시 localStorage 실시간 반영되지 않음
 - Like 페이지 활성화 시점에서 localStorage.getItem 하므로 해당 문제 발생
-- <Detail/> 활성화 시 Likes 페이지를 off 해주도록 하자
+- Detail/ 활성화 시 Likes 페이지를 off 해주도록 하자
 - localStorage.getItem을 전역변수로 변경하면서 해결
 
-<Toast/>
+Toast/
 
 Toast 직접 제작해보기
 
@@ -58,15 +58,15 @@ Toast 직접 제작해보기
 - useTimeout로 3000ms후 사라지게
 - Typescript로 늘 받지는 않는 props를 optional하게 설정할 수 있을까?
 
-<Likes/>
+Likes/
 
-- Likes 페이지에서 해당 like 클릭 시 <Detail/>로 넘어가는 기능 필요
+- Likes 페이지에서 해당 like 클릭 시 Detail/로 넘어가는 기능 필요
 - Detail toggle을 전역변수로 변경하기
 - Detail에 props로 전송되는 data를 전역으로 변경
   ㄴ likes page에서 like 클릭 시 2에서 변경한 전역 data를 localStorgae에 담긴 요소들로 변경
   ㄴ likes 페이지 완성
 
-<Search/>
+Search/
 
 - useRef를 통한 활성화 시 기본 focus()
 - input내부의 state값으로 searchState 업데이트
@@ -79,7 +79,7 @@ Toast 직접 제작해보기
 
 ## Issue
 
-<photos/components/main>
+photos/components/main
 
 - server에서 받아온 data를 자식 Component에 보내주는 로직에서 null로 넘어가는 현상 발견
 - 부모 컴포넌트에서 data가 lodable일때만 보내주는 로직으로 변경
@@ -94,9 +94,9 @@ Toast 직접 제작해보기
 
 단기
 
-- <Main> pagination 필요
-- <Search/> Debounce 적용하기
-- <Search/> 검색어 공백 등 예외처리
+- Main/ pagination 필요
+- Search/ Debounce 적용하기
+- Search/ 검색어 공백 등 예외처리
 
 장기
 
@@ -104,7 +104,7 @@ Toast 직접 제작해보기
 - .env로 API_KEY 등 빼기
 - 기존 resolve, alias를 통해 @assets 형태로 절대 경로 접근 되던것을 tsconfigpaths()로 변경. 작동하지 않는듯.
 - 전체적으로 최적화 필요
-- <Loading/> 만들고 적용하기
+- Loading/ 만들고 적용하기
 
 ## 회고
 
