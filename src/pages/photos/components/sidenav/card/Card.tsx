@@ -9,11 +9,11 @@ import {
   selectedState,
 } from '../../../../../store/atoms/detailState';
 
-interface cardProps {
+interface CardProps {
   like: Photo;
 }
 
-function Card({ like }: cardProps) {
+function Card({ like }: CardProps) {
   const setIsOpen = useSetRecoilState(detailState);
   const setSelected = useSetRecoilState(selectedState);
 

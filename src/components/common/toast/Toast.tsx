@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 import styles from './Toast.module.scss';
 
-interface toastProps {
+interface ToastProps {
   toast: boolean;
   setToast: (value: boolean) => void;
   message: string | number;
-  bottom: number;
+  bottom?: number;
   result: number;
 }
 
-function Toast({ setToast, message, bottom, result }: toastProps) {
+function Toast({ setToast, message, bottom, result }: ToastProps) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setToast(false);

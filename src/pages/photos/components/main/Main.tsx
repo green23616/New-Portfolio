@@ -1,13 +1,10 @@
-import { useState } from 'react';
-import Bookmark from '../navigation/Bookmark.json';
 // CSS
 import styles from './Main.module.scss';
 // Type
 import Photo from '../../../../types/CardType';
 // Components
 import Up from '../../../../components/common/up/Up';
-import Card from '../card/Card';
-import Detail from '../detail/Detail';
+import Card from './card/Card';
 // Tanstack Query + axios
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -16,6 +13,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { detailState } from '../../../../store/atoms/detailState';
 import { searchState } from '../../../../store/atoms/searchState';
 import { bookmarkState } from '../../../../store/atoms/bookmarkState';
+import Detail from './detail/Detail';
 
 function Main() {
   const searchValue = useRecoilValue(searchState);
@@ -24,7 +22,15 @@ function Main() {
 
   const handleClick = () => {
     setBookmarkArr(prev => {
-      return [...prev, { path: searchValue }];
+      if (prev.some(bookmark => bookmark.path === searchValue)) {
+        alert('이미 북마크에 추가되어 있습니다');
+        return prev;
+      } else if (prev.length < 6) {
+        return [...prev, { path: searchValue }];
+      } else {
+        alert('최대 6개까지 추가할 수 있습니다');
+        return prev;
+      }
     });
   };
 
@@ -71,6 +77,7 @@ function Main() {
       <div className={styles.container}>
         {isLoading && <p>Loading</p>}
         {isError && <p>Error</p>}
+        {data && data.total === 0 && '검색결과가 존재하지 않습니다'}
         {data &&
           data.results.map((e: Photo) => {
             return <Card data={e} key={e.id} />;

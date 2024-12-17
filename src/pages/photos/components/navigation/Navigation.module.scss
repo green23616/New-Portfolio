@@ -5,8 +5,10 @@
   height: 56px;
 
   border-bottom: 1px solid #e6e6e6;
-  &__ul {
-    width: 50%;
+
+  .container {
+    width: 62%;
+    height: 100%;
 
     @include mixin-flex(space-around);
 
@@ -14,21 +16,12 @@
 
     transition: all 0.2s linear;
 
-    &__li {
-      font-size: 18px;
-      font-weight: 500;
-
-      cursor: pointer;
-    }
-
     &__likes {
+      @include mixin-flex(center);
+
       color: red;
 
       cursor: pointer;
-
-      .likeslength {
-        position: absolute;
-      }
     }
   }
 }

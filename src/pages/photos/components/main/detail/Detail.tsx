@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 // CSS
 import styles from './Detail.module.scss';
 // Types
-import Photo from '../../../../types/CardType';
 // Component
-import Toast from '../../../../components/common/toast/Toast';
 // Recoil
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { storageState } from '../../../../store/atoms/storageState';
+import { storageState } from '../../../../../store/atoms/storageState';
 import {
   detailState,
   selectedState,
-} from '../../../../store/atoms/detailState';
+} from '../../../../../store/atoms/detailState';
+import Photo from '../../../../../types/CardType';
+import Toast from '../../../../../components/common/toast/Toast';
 
 function Detail() {
   const [likes, setLikes] = useState(false);

@@ -3,7 +3,7 @@
 
   right: 0;
   top: 0;
-  transform: translate(140%, 20%);
+  transform: translate(100%, 22%);
 
   .container {
     width: 300px;
@@ -20,8 +20,24 @@
       font-size: 30px;
 
       &__favorite {
-        color: red;
         padding: 20px 20px 20px 0;
+      }
+
+      &__delete {
+        position: absolute;
+        right: 20px;
+        top: 66px;
+
+        font-size: 34px;
+
+        cursor: pointer;
+
+        transition: all 0.1s linear;
+
+        &:active {
+          color: red;
+          scale: 1.1;
+        }
       }
     }
     &__main {

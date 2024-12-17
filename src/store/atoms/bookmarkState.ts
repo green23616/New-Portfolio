@@ -1,19 +1,17 @@
 import { atom } from 'recoil';
 
-export const bookmarkState = atom({
+interface Bookmark {
+  path: string;
+}
+
+export const bookmarkState = atom<Bookmark[]>({
   key: 'bookmarkState',
-  default: [
-    {
-      path: 'apple',
-    },
-    {
-      path: 'car',
-    },
-    {
-      path: 'book',
-    },
-    {
-      path: 'conference',
+  default: JSON.parse(localStorage.getItem('bookmark') || '[]'),
+  effects_UNSTABLE: [
+    ({ onSet }) => {
+      onSet(newValue => {
+        localStorage.setItem('bookmark', JSON.stringify(newValue));
+      });
     },
   ],
 });

@@ -31,6 +31,7 @@
 - Recoil, Tanstack Query같은건 Starter pack에 미리 세팅. npm i recoil npm i @tanstack/react-query
 - Framer motion 적용 npm i motion
 - Google Material Icon 사용 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+- header, main, footer 높이 고정은 px로 유동은 calc() 사용
 
 Photos/
 
@@ -65,15 +66,24 @@ Likes/
 - Detail에 props로 전송되는 data를 전역으로 변경
   ㄴ likes page에서 like 클릭 시 2에서 변경한 전역 data를 localStorgae에 담긴 요소들로 변경
   ㄴ likes 페이지 완성
+추가 개선점
+  1. like 한번에 비우기 기능
+     ㄴ localStorage를 기본값으로 돌리자
+     ㄴ localStorage를 비우면서 관련된 recoil atom들도 같이 업데이트 해줘야 함
+  2. like page 사이즈 재조정
 
 Search/
 
 - useRef를 통한 활성화 시 기본 focus()
 - input내부의 state값으로 searchState 업데이트
+- 공백 검색 막기
 - 검색어 Navigation에 고정하는 북마크 기능 추가
   ㄴ Navigation에서 검색어를 Array로 만들고 해당 Array를 업데이트
   ㄴ atom으로 만들었는데 localStorage로 바꿔야할듯
-- Toast 사용
+  ㄴ localStorage에 동일한 값이 있을때 추가안되게
+  ㄴ 최대 북마크 Array.length 6개로 제한
+  ㄴ 북마크 삭제 기능
+- Toast로 기능마다 알림 띄우기
 
 4. **QnA**
 
@@ -97,6 +107,7 @@ photos/components/main
 - Main/ pagination 필요
 - Search/ Debounce 적용하기
 - Search/ 검색어 공백 등 예외처리
+- Navigation에서 Bookmark/Search/Like 세 부분으로 구역 나누기
 
 장기
 
@@ -111,6 +122,9 @@ photos/components/main
 - Git push 습관들이기
 - 생각을 먼저 하고 코드로 옮기는 습관들이기
 - React Intersection Observer 사용해보기
+
+- 개선점을 찾아냈을때, 그리고 생각을 코드로 옮길때 성취감이 너무 좋다
+- 머리로 코드를 짜고 그걸 실제 코드로 옮기는 과정이 빨라졌으면 좋겠다. 언젠가는 머리로만 코드를 짜고 실제로 짜는건 AI통해서 가능하지 않을까.
 
 ## 성취
 

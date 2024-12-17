@@ -3,7 +3,7 @@
   flex-direction: column;
 
   width: 100%;
-  min-height: 90vh;
+  min-height: calc(100vh - 180px - 56px - 56px);
 
   border-bottom: 1px solid #e6e6e6;
 
@@ -30,7 +30,7 @@
       }
       &:active {
         scale: 1.4;
-        color: gray;
+        color: rgb(255, 0, 0);
       }
     }
   }
