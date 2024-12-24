@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 // CSS
 import styles from './Detail.module.scss';
 // Types
+import Photo from '../../../../../types/CardType';
 // Component
+import Toast from '../../../../../components/common/toast/Toast';
 // Recoil
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { storageState } from '../../../../../store/atoms/storageState';
@@ -10,21 +12,21 @@ import {
   detailState,
   selectedState,
 } from '../../../../../store/atoms/detailState';
-import Photo from '../../../../../types/CardType';
-import Toast from '../../../../../components/common/toast/Toast';
+import { likeState } from '../../../../../store/atoms/likeState';
 
 function Detail() {
   const [likes, setLikes] = useState(false);
   const [toast, setToast] = useState(false);
   const [result, setResult] = useState(0);
   const [localLikes, setLocalLikes] = useRecoilState(storageState);
+  const setLikePage = useSetRecoilState(likeState);
   const setIsOpen = useSetRecoilState(detailState);
   const selected = useRecoilValue(selectedState);
 
   useEffect(() => {
     const isLiked = localLikes.some((item: Photo) => item.id === selected?.id);
     setLikes(isLiked);
-  }, [selected, localLikes]);
+  }, [selected?.id]);
 
   useEffect(() => {
     const handleKeydown = (event: KeyboardEvent) => {
@@ -48,6 +50,7 @@ function Detail() {
       localStorage.setItem('likes', JSON.stringify(newLikes));
       setLocalLikes(newLikes);
       setLikes(true);
+      setLikePage(true);
       setToast(true);
       setResult(1);
     } else {
@@ -59,6 +62,7 @@ function Detail() {
       setLikes(false);
       setToast(true);
       setResult(0);
+      setLikePage(true);
     }
   };
 
@@ -127,7 +131,7 @@ function Detail() {
           message={
             likes ? 'Likes에 추가되었습니다' : 'Likes에서 삭제되었습니다'
           }
-          bottom={160}
+          bottom={120}
           result={result}
         />
       )}

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 // CSS
 import styles from './Up.module.scss';
+// lodash
 import throttle from 'lodash/throttle';
 
 function Up() {

@@ -23,7 +23,7 @@ function Photos() {
         <Navigation />
         <Main />
         <footer className={styles.container__footer}>
-          <h3>Original Design, Code by JW 2024</h3>
+          <h4>Original Design, Code by JW 2024</h4>
         </footer>
       </div>
     </div>

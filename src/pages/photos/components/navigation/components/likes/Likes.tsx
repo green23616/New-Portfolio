@@ -1,28 +1,26 @@
 // CSS
-import styles from './SideNav.module.scss';
+import styles from './Likes.module.scss';
 // Types
-import Photo from '../../../../types/CardType.ts';
+import Photo from '../../../../../../types/CardType';
 // Component
-import Card from './card/Card.tsx';
+import Item from './item/Item';
 // Recoil
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
-import { likeState } from '../../../../store/atoms/likeState.ts';
-import { storageState } from '../../../../store/atoms/storageState.ts';
-import { selectedState } from '../../../../store/atoms/detailState.ts';
+import { likeState } from '../../../../../../store/atoms/likeState';
+import { storageState } from '../../../../../../store/atoms/storageState';
 
-function SideNav() {
+function Likes() {
   const setLikePage = useSetRecoilState(likeState);
-  const resetSelected = useResetRecoilState(selectedState);
   const resetStorage = useResetRecoilState(storageState);
   const localLikes = useRecoilValue(storageState);
 
   const handleDelete = () => {
-    resetSelected();
     resetStorage();
+    // localStorage.removeItem('likes')
   };
 
   return (
-    <div className={styles.sidenav}>
+    <div className={styles.likes}>
       <div className={styles.container}>
         <div
           className={'material-symbols-outlined'}
@@ -52,11 +50,11 @@ function SideNav() {
         {localLikes.length < 1
           ? '사진에 좋아요를 눌러보세요'
           : localLikes.map((like: Photo) => {
-              return <Card like={like} key={like.id} />;
+              return <Item like={like} key={like.id} />;
             })}
       </div>
     </div>
   );
 }
 
-export default SideNav;
+export default Likes;

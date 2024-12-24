@@ -1,7 +1,7 @@
 // CSS
 import styles from './Navigation.module.scss';
 // Component
-import SideNav from '../sidenav/SideNav';
+import Likes from './components/likes/Likes.tsx';
 import Bookmarks from './components/bookmarks/Bookmarks';
 import Search from './components/search/Search.tsx';
 // Recoil
@@ -31,7 +31,7 @@ function Navigation() {
           favorite
           <span>x {localLikes.length}</span>
         </li>
-        {likePage && <SideNav />}
+        {likePage && <Likes />}
       </ul>
     </nav>
   );

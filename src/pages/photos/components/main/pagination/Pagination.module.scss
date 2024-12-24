@@ -1,0 +1,63 @@
+.pagination {
+  @include mixin-flex(space-around);
+
+  width: 50%;
+  height: 56px;
+
+  margin: 30px;
+
+  font-size: 20px;
+
+  &__prevBtn {
+    @include mixin-flex(center);
+    flex: 1;
+
+    height: 100%;
+
+    font-size: 30px;
+
+    cursor: pointer;
+  }
+
+  &__number {
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex: 8;
+
+    height: 100%;
+
+    &__el {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+
+      height: 100%;
+
+      border-radius: 5px;
+
+      cursor: pointer;
+
+      transition: all 0.2s linear;
+
+      &.active {
+        height: 80%;
+        background-color: rgb(209, 208, 208);
+        color: white;
+      }
+    }
+  }
+
+  &__nextBtn {
+    @include mixin-flex(center);
+    flex: 1;
+
+    height: 100%;
+
+    font-size: 30px;
+
+    cursor: pointer;
+  }
+}

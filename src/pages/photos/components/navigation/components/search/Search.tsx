@@ -4,13 +4,15 @@ import styles from './Search.module.scss';
 // Recoil
 import { useSetRecoilState } from 'recoil';
 import { searchState } from '../../../../../../store/atoms/searchState';
+import { pageState } from '../../../../../../store/atoms/pageState';
 
-function Search({}) {
+function Search() {
   const [isActive, setIsActive] = useState(false);
   const [isText, setIstext] = useState(true);
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
   const setSearch = useSetRecoilState(searchState);
+  const setPageValue = useSetRecoilState(pageState);
 
   const handleClick = () => {
     setIsActive(prev => !prev);
@@ -36,6 +38,7 @@ function Search({}) {
     if (e.key === 'Enter') {
       if (inputValue !== '') {
         setSearch(inputValue);
+        setPageValue(1);
       } else {
         alert('공백은 입력할 수 없습니다');
       }

@@ -1,19 +1,19 @@
 // CSS
-import styles from './Card.module.scss';
+import styles from './Item.module.scss';
 // Type
-import Photo from '../../../../../types/CardType';
+import Photo from '../../../../../../../types/CardType';
 // Recoil
 import { useSetRecoilState } from 'recoil';
 import {
   detailState,
   selectedState,
-} from '../../../../../store/atoms/detailState';
+} from '../../../../../../../store/atoms/detailState';
 
 interface CardProps {
   like: Photo;
 }
 
-function Card({ like }: CardProps) {
+function Item({ like }: CardProps) {
   const setIsOpen = useSetRecoilState(detailState);
   const setSelected = useSetRecoilState(selectedState);
 
@@ -23,7 +23,7 @@ function Card({ like }: CardProps) {
   };
 
   return (
-    <div className={styles.card} key={like.id} onClick={handleClick}>
+    <div className={styles.item} key={like.id} onClick={handleClick}>
       <div className={styles.container} key={like.id}>
         <img
           className={styles.container__cardImg}
@@ -36,4 +36,4 @@ function Card({ like }: CardProps) {
   );
 }
 
-export default Card;
+export default Item;

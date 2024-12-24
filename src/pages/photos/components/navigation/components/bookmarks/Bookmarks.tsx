@@ -4,10 +4,12 @@ import styles from './Bookmarks.module.scss';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { bookmarkState } from '../../../../../../store/atoms/bookmarkState';
 import { searchState } from '../../../../../../store/atoms/searchState';
+import { pageState } from '../../../../../../store/atoms/pageState';
 
 function Bookmarks() {
   const [bookmarkArr, setBookmarkArr] = useRecoilState(bookmarkState);
   const setSearch = useSetRecoilState(searchState);
+  const setPageValue = useSetRecoilState(pageState);
 
   const handleCloseBtnClick = (pathToRemove: string) => {
     setBookmarkArr(prev => {
@@ -23,6 +25,7 @@ function Bookmarks() {
 
   const handleClick = (paths: string) => {
     setSearch(paths);
+    setPageValue(1);
   };
 
   return (

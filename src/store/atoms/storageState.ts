@@ -2,9 +2,14 @@ import { atom } from 'recoil';
 
 export const storageState = atom({
   key: 'storageState',
-  default: JSON.parse(localStorage.getItem('likes') || '[]'),
+  default: [],
   effects_UNSTABLE: [
-    ({ onSet }) => {
+    ({ setSelf, onSet }) => {
+      const savedValue = localStorage.getItem('likes');
+      if (savedValue) {
+        setSelf(JSON.parse(savedValue));
+      }
+
       onSet(newValue => {
         if (newValue.length === 0) {
           localStorage.removeItem('likes');
