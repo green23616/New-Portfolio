@@ -18,15 +18,18 @@ function Detail() {
   const [likes, setLikes] = useState(false);
   const [toast, setToast] = useState(false);
   const [result, setResult] = useState(0);
-  const [localLikes, setLocalLikes] = useRecoilState(storageState);
+  const [localLikes, setLocalLikes] =
+    useRecoilState<(Photo | null)[]>(storageState);
   const setLikePage = useSetRecoilState(likeState);
   const setIsOpen = useSetRecoilState(detailState);
   const selected = useRecoilValue(selectedState);
 
   useEffect(() => {
-    const isLiked = localLikes.some((item: Photo) => item.id === selected?.id);
+    const isLiked = localLikes.some(
+      (item): item is Photo => item !== null && item.id === selected?.id,
+    );
     setLikes(isLiked);
-  }, [selected?.id]);
+  }, [selected?.id, localLikes]);
 
   useEffect(() => {
     const handleKeydown = (event: KeyboardEvent) => {
@@ -42,11 +45,11 @@ function Detail() {
 
   const handleClick = () => {
     const alreadyIn = localLikes.some(
-      (item: Photo) => item.id === selected?.id,
+      item => (item as Photo).id === selected?.id,
     );
 
     if (!alreadyIn) {
-      const newLikes = [...localLikes, selected];
+      const newLikes: (Photo | null)[] = [...localLikes, selected];
       localStorage.setItem('likes', JSON.stringify(newLikes));
       setLocalLikes(newLikes);
       setLikes(true);
@@ -55,7 +58,7 @@ function Detail() {
       setResult(1);
     } else {
       const newLikes = localLikes.filter(
-        (item: Photo) => item.id !== selected?.id,
+        (item): item is Photo => item !== null && item.id !== selected?.id,
       );
       localStorage.setItem('likes', JSON.stringify(newLikes));
       setLocalLikes(newLikes);

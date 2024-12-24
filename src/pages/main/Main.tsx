@@ -2,17 +2,17 @@
 import styles from './Main.module.scss';
 // Components
 import Darkmode from '../../components/common/darkmode/Darkmode';
+import Card from './components/Card';
+import Header from '../../components/common/header/Header';
 // Recoil
 import { darkState } from '../../store/atoms/darkState';
 import { useRecoilValue } from 'recoil';
-import Card from './components/Card';
-import Header from '../../components/common/header/Header';
 
 function Main() {
   const isDark = useRecoilValue(darkState);
   return (
     <div className={styles.main}>
-      <Header/>
+      <Header />
       <div
         className={`${styles.container} ${isDark ? styles.dark : styles.light}`}
       >

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+// CSS
 import styles from './Toast.module.scss';
 
 interface ToastProps {
@@ -16,7 +17,7 @@ function Toast({ setToast, message, bottom, result }: ToastProps) {
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [setToast]);
 
   return (
     <div className={` ${styles.toast}`} style={{ bottom: `${bottom}px` }}>

@@ -49,9 +49,9 @@ function Likes() {
         </p>
         {localLikes.length < 1
           ? '사진에 좋아요를 눌러보세요'
-          : localLikes.map((like: Photo) => {
-              return <Item like={like} key={like.id} />;
-            })}
+          : localLikes
+              .filter((like): like is Photo => like !== null)
+              .map(like => <Item like={like} key={like.id} />)}
       </div>
     </div>
   );

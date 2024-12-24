@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
+import Photo from '../../types/CardType';
 
-export const storageState = atom({
+export const storageState = atom<(Photo | null)[]>({
   key: 'storageState',
   default: [],
   effects_UNSTABLE: [
