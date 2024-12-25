@@ -1,11 +1,4 @@
-import {
-  ChangeEvent,
-  KeyboardEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 // CSS
 import styles from './Search.module.scss';
 // Recoil
@@ -64,6 +57,7 @@ function Search() {
         search
       </div>
       <input
+        aria-label="검색"
         className={`${styles.search__searchBar} ${
           isActive ? styles.active : styles.inactive
         }`}

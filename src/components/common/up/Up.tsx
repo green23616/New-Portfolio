@@ -1,20 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 // CSS
 import styles from './Up.module.scss';
 // lodash
 import throttle from 'lodash/throttle';
 
 function Up() {
-  useEffect(() => {
-    console.log('Up Render');
-  });
-  const scrollY = useRef(0);
   const [isY, setIsY] = useState(false);
 
   useEffect(() => {
     const handleScroll = throttle(() => {
-      scrollY.current = window.scrollY;
-      if (scrollY.current > 500) {
+      if (window.scrollY > 500) {
         setIsY(true);
       } else {
         setIsY(false);
@@ -36,14 +31,14 @@ function Up() {
   };
 
   return (
-    <div
+    <button
       className={`${'material-symbols-outlined'} ${styles.up} ${
         isY ? styles.active : styles.inactive
       }`}
       onClick={handleClick}
     >
       arrow_upward
-    </div>
+    </button>
   );
 }
 

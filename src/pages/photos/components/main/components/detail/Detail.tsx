@@ -93,28 +93,17 @@ function Detail() {
             <p className={styles.profileName}>{selected?.user.username}</p>
           </div>
           <div className={styles.container__header__menu}>
-            {likes ? (
-              <p
-                className={`${'material-symbols-outlined'} ${
-                  styles.container__header__close
-                }`}
-                onClick={handleClick}
-                style={{
-                  color: 'red',
-                }}
-              >
-                favorite
-              </p>
-            ) : (
-              <p
-                className={`${'material-symbols-outlined'} ${
-                  styles.container__header__close
-                }`}
-                onClick={handleClick}
-              >
-                favorite
-              </p>
-            )}
+            <p
+              className={`${'material-symbols-outlined'} ${
+                styles.container__header__close
+              }`}
+              onClick={handleClick}
+              style={{
+                color: likes ? 'red' : 'inherit',
+              }}
+            >
+              favorite
+            </p>
           </div>
         </div>
         <div className={styles.container__main}>
@@ -138,6 +127,7 @@ function Detail() {
             }
             result={result}
             bottom={0}
+            time={2000}
           />
         )}
       </div>

@@ -8,19 +8,20 @@ interface ToastProps {
   message: string | number;
   bottom?: number;
   result: number;
+  time: number;
 }
 
-function Toast({ setToast, message, bottom, result }: ToastProps) {
+function Toast({ setToast, message, bottom, result, time }: ToastProps) {
   useEffect(() => {
     console.log('Toast Render');
   });
   useEffect(() => {
     const timer = setTimeout(() => {
       setToast(false);
-    }, 2000);
+    }, time);
 
     return () => clearTimeout(timer);
-  }, [setToast]);
+  }, [setToast, time]);
 
   return (
     <div className={` ${styles.toast}`} style={{ bottom: `${bottom}px` }}>
