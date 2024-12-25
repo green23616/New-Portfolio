@@ -1,7 +1,10 @@
 .toast {
-  @include mixin-flex(center);
+  @include flex(center);
 
   position: absolute;
+
+  left: 50%;
+  transform: translate(-50%, 0);
 
   width: 400px;
   height: 60px;
@@ -12,17 +15,15 @@
   user-select: none;
 
   .container {
-    @include mixin-flex(center);
+    @include flex(center);
 
     width: 80%;
     height: 100%;
 
-    background-color: #f8f8f8;
-    border: 1px solid #ededed;
     border-radius: 5px;
 
     &__main {
-      @include mixin-flex(start);
+      @include flex(start);
 
       width: 90%;
       height: 100%;

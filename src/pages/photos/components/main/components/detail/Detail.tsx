@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react';
 // CSS
 import styles from './Detail.module.scss';
 // Types
-import Photo from '../../../../../types/CardType';
+import Photo from '../../../../../../types/CardType';
 // Component
-import Toast from '../../../../../components/common/toast/Toast';
+import Toast from '../../../../../../components/common/toast/Toast';
 // Recoil
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { storageState } from '../../../../../store/atoms/storageState';
+import { storageState } from '../../../../../../store/atoms/storageState';
+import { likeState } from '../../../../../../store/atoms/likeState';
 import {
   detailState,
   selectedState,
-} from '../../../../../store/atoms/detailState';
-import { likeState } from '../../../../../store/atoms/likeState';
+} from '../../../../../../store/atoms/detailState';
 
 function Detail() {
   const [likes, setLikes] = useState(false);
@@ -126,18 +126,18 @@ function Detail() {
             <h3>{selected?.created_at.split('T')[0]}</h3>
           </div>
         </div>
+        {toast && (
+          <Toast
+            toast={toast}
+            setToast={setToast}
+            message={
+              likes ? 'Likes에 추가되었습니다' : 'Likes에서 삭제되었습니다'
+            }
+            result={result}
+            bottom={0}
+          />
+        )}
       </div>
-      {toast && (
-        <Toast
-          toast={toast}
-          setToast={setToast}
-          message={
-            likes ? 'Likes에 추가되었습니다' : 'Likes에서 삭제되었습니다'
-          }
-          bottom={120}
-          result={result}
-        />
-      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@
 import styles from './Pagination.module.scss';
 // Recoil
 import { useRecoilState } from 'recoil';
-import { pageState } from '../../../../../store/atoms/pageState';
+import { pageState } from '../../../../../../store/atoms/pageState';
 
 interface PaginationProps {
   totalPages: number | null;

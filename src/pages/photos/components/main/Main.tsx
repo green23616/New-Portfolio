@@ -4,9 +4,9 @@ import styles from './Main.module.scss';
 import Photo from '../../../../types/CardType';
 // Components
 import Up from '../../../../components/common/up/Up';
-import Card from './card/Card';
-import Detail from './detail/Detail';
-import Pagination from './pagination/Pagination';
+import Card from './components/card/Card';
+import Detail from './components/detail/Detail';
+import Pagination from './components/pagination/Pagination';
 // Tanstack Query + axios
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';

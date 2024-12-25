@@ -1,5 +1,5 @@
 .pagination {
-  @include mixin-flex(space-around);
+  @include flex(space-around);
 
   width: 50%;
   height: 56px;
@@ -9,7 +9,7 @@
   font-size: 20px;
 
   &__prevBtn {
-    @include mixin-flex(center);
+    @include flex(center);
     flex: 1;
 
     height: 100%;
@@ -20,7 +20,6 @@
   }
 
   &__number {
-
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -51,7 +50,7 @@
   }
 
   &__nextBtn {
-    @include mixin-flex(center);
+    @include flex(center);
     flex: 1;
 
     height: 100%;

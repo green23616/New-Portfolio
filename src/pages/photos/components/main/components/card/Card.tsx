@@ -1,13 +1,13 @@
 // CSS
 import styles from './Card.module.scss';
 // Type
-import Photo from '../../../../../types/CardType';
+import Photo from '../../../../../../types/CardType';
 // Recoil
 import { useSetRecoilState } from 'recoil';
 import {
   detailState,
   selectedState,
-} from '../../../../../store/atoms/detailState';
+} from '../../../../../../store/atoms/detailState';
 
 interface CardProps {
   data: Photo;

@@ -11,7 +11,7 @@
   font-style: normal;
 }
 
-@mixin mixin-flex($justify) {
+@mixin flex($justify) {
   display: flex;
   justify-content: $justify;
   align-items: center;

@@ -1,5 +1,5 @@
 .search {
-  @include mixin-flex(center);
+  @include flex(center);
 
   width: 30%;
   height: 100%;
