@@ -7,8 +7,13 @@ import Navigation from './components/navigation/Navigation';
 import { useSetRecoilState } from 'recoil';
 import { searchState } from '../../store/atoms/searchState';
 import { pageState } from '../../store/atoms/pageState';
+import { useEffect } from 'react';
 
 function Photos() {
+  useEffect(() => {
+    console.log('Photos Render');
+  });
+
   const setSearch = useSetRecoilState(searchState);
   const setPageValue = useSetRecoilState(pageState);
 

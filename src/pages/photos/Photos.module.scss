@@ -2,10 +2,11 @@
   width: 100%;
   height: 100vh;
 
+  background-color: white;
+
   -webkit-user-drag: none;
   user-select: none;
 
-  background-color: white;
   &__header {
     @include flex(center);
 
@@ -24,10 +25,11 @@
   }
   &__footer {
     @include flex(center);
+    
+    position: relative;
 
     width: 100%;
     height: 56px;
-    position: relative;
 
     border-bottom: 1px solid #e6e6e6;
   }

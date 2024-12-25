@@ -5,93 +5,147 @@
 - React 18.3.1 + Typescript with Vite
 - React Router
 - Recoil + Tanstack Query v5 + Axios
-- SCSS + Framer motion
+- SCSS
 - lodash
 
-## 요구사항
+## 개발목표
 
 - Composition Component 숙지
-- 최적화
-  - Memoization 활용
-  - useTransition 활용
-  - React.lazy와 Suspense 활용
-  - lodash를 활용한 Throttle과 debounce 사용
+- Client state와 Serve State의 효율적인 관리
+- 성능 개선
+  - Render 줄이기
+  - React.lazy와 suspense
+  - Memoization
+    - React.memo, useMemo
+    - useCallback
+  - lodash
+    - Throttling
+    - Debounce
+  - useTransition
+- Toast popup 제작
+- React Devtools, React Query Tools 사용
 
 ## 과정
 
-**사전준비**
+**준비**
 
-- 상태정의
+- State 정의
   - 전역 상태와 지역 상태 분류
 - 공통 컴포넌트 분류
+  - Darkmode
+  - 상단 이동 버튼
+  - Toast popup
 - Router 정리
+  - Main Page
+    - 프로젝트 구조 변경으로 임시 삭제
+  - Blog, Music
+    - 프로젝트 구조 변경으로 임시 삭제
+  - Photos
+- Google material icons 사용
 
-**진행**
+**시작**
 
-- Routing. npm i react-router
-- Recoil, Tanstack Query같은건 Starter pack에 미리 세팅. npm i recoil npm i @tanstack/react-query
-- Framer motion 적용 npm i motion
-- Google Material Icon 사용 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-- header, main, footer 높이 고정은 px로 유동은 calc() 사용
+**1. Photos Page (Main Page)**
 
-Photos/
-
+- 구조
+  - Header
+  - Navigation
+    - Bookmark
+    - Search
+    - Like
+      - Item
+  - Main
+    - Card
+    - Detail
+    - Pagination
+    - Toast (공통 컴포넌트)
+    - UP (공통 컴포넌트)
+    - Darkmode (공통 컴포넌트) > 프로젝트 구조 변경으로 임시 삭제
+  - Footer
+- 공통 컴포넌트 높이는 px로 고정 후 컨텐츠 부분 calc() 사용
 - 페이지 최상단 이동 버튼 구현
-  - Scroll event 발생 시 render 발생. 브라우저 스크롤 위치값 저장에 useRef를 사용해 불필요한 Render 개선.
-  - Scroll event에 throttle 사용. npm install lodash
-  - 임시로 준 60vh 제거 New-Portfolio\src\pages\photos\components\main\Main.module.scss
-- SCSS와 Recoil로 Darkmode 구현
+  - Scroll event 발생 시 render 발생. 브라우저 스크롤 위치값 저장에 useRef를 사용해 불필요한 Render 개선
+  - Scroll event에 throttling 사용
+- Darkmode 구현
+  - SCSS 전역 CSS + Recoil
 
-Detail/
+**2. Navigation Component**
 
-- Detail/에서 like 버튼 클릭 시 localStorage에 추가하는 기능 구현
-- 한번 더 클릭 시 localStorage에서 제거하는 기능 필요
-- Likes 페이지 활성화, Detail/ 활성화 상태에서 Likes 버튼 추가 시 localStorage 실시간 반영되지 않음
-- Like 페이지 활성화 시점에서 localStorage.getItem 하므로 해당 문제 발생
-- Detail/ 활성화 시 Likes 페이지를 off 해주도록 하자
-- localStorage.getItem을 전역변수로 변경하면서 해결
+- Like Component 토글 위해 RecoilState 구독
+- localStorage에서 Like list 가져오기 위해 RecoilValue로 구독
+- .length통해 좋아요 리스트 개수 표시
 
-Toast/
+    - **Bookmark Component**
+      - 검색어 북마크바에 추가 위해 localStorage 활용 및 Recoil atom 추가
+      - 배열로 만들어 localStorage에 추가 및 삭제
+      - localStorage 실시간 추가 및 삭제 Recoil에서도 update 해주기 위해 Recoil effects_UNSTABLE 사용
+      - filter() 활용 삭제 기능 추가 
+      - 북마크 변경 시 1페이지로 돌아가기 기능 추가
+      - 
+    - **Search Component**
+      - useRef() 사용 검색창 활성화 시 기본 focus
+      - input내부의 state값으로 searchState 업데이트
+      - 공백 입력 제한 추가
+      - 
+    - **Like Component**
+      - Detail Component에서 먼저 생성한 likes 배열 Recoil 구독
+      - likes 배열 값이 0일 경우 안내 문구 추가
+      - map해서 Item Page에 props로 전달
+      - null일 경우 Narrowing
+      - like 한번에 비우기 기능 추가
+         - localStorage를 비우면서 recoil도 같이 업데이트 필요
+         - useResetRecoilstate()를 통해 default 값인 []로 동시에 업데이트
+         - 
+    - **Item Component**
+      - Like Component에서 props로 받은 likes 배열 map으로 뿌리기
+      - useSetRecoilState로 likes 배열을 수정할 수 있게 만들어 Detail Component와 연동되는 기능 추가
 
-Toast 직접 제작해보기
+**3. Main Component**
 
-- 공통 Component로 제작해 어디서도 Import로 사용할 수 있게
-- props로 message를 받을 수 있게
-- useTimeout로 3000ms후 사라지게
-- Typescript로 늘 받지는 않는 props를 optional하게 설정할 수 있을까?
+/////////////////////////////Client + Server state 관리/////////////////////////////
 
-like/
+- Tanstack Query v5 통해 data를 stale하게 fetch 및 cache 처리
+- isPending, isError, error 상태 처리
+- Recoil과 결합해 Client state와 Server state를 결합
+  - client에서 page와 검색어를 변경함으로 새로운 data를 fetch할 수 있게 설계
+- data 받아오기 전 상태 optional chaining으로 처리
+- fetch 된 data를 Card component에 map 해주기
 
-- like 페이지에서 like 클릭 시 해당 Detail/로 넘어가는 기능 필요
-- Detail toggle을 전역변수로 변경하기
-- Detail에 props로 전송되는 data를 전역으로 변경
-  ㄴ like page에서 like 클릭 시 전역 data를 localStorgae에 담긴 요소들로 변경
-  ㄴ like 페이지 완성
-  추가 개선점
-  1. like 한번에 비우기 기능
-     - localStorage를 기본값으로 돌리자
-     - localStorage를 비우면서 관련된 recoil atom들도 같이 업데이트 해줘야 함
-     - resetRecoilstate를 쓰면 이 과정이 알아서 된다고 함
-     - 완성
-     - 가끔 삭제가 되지 않는 버그 발견> 원인 파악부터
-  2. like page 사이즈 재조정
+/////////////////////////////검색결과 처리/////////////////////////////
 
-Search/
+- 검색결과 출력 문구 추가
+- 검색결과 없는 경우 안내 문구 추가
+ 
+/////////////////////////////북마크 기능/////////////////////////////
 
-- useRef를 통한 활성화 시 기본 focus()
-- input내부의 state값으로 searchState 업데이트
-- 공백 검색 막기
-- 검색어 Navigation에 고정하는 북마크 기능 추가
-  - Navigation에서 검색어를 Array로 만들고 해당 Array를 업데이트
-  - atom으로 만들었는데 localStorage로 바꿔야할듯
-  - localStorage에 동일한 값이 있을때 추가안되게
-  - 최대 북마크 Array.length 6개로 제한
-  - 북마크 삭제 기능
+- 검색어 북마크바에 추가 위해 localStorage 활용 및 Recoil 추가
+- localStorage 실시간 추가 및 삭제 Recoil에서도 update 해주기 위해 Recoil effects_UNSTABLE 사용
+- some()을 통한 중복 검사 및 추가 방지
+- 북마크 개수 6개 제한 기능 추가
 
-Pagination/
+  - **Card Component**
+    - Main Component에서 map으로 받은 data를 Recoil에 추가
+    - React.memo() 통한 최적화
 
-- 코드가 길어질 것 같아 Component로 분리
-- tanstackQuery에서 queryKey에 Recoil value를 포함시켜야 실시간 update된다
+  - **Detail Component**
+    -  Detail/에서 like 버튼 클릭 시 localStorage에 추가하는 기능 구현
+    - 한번 더 클릭 시 localStorage에서 제거하는 기능 필요
+    - Likes 페이지 활성화, Detail/ 활성화 상태에서 Likes 버튼 추가 시 localStorage 실시간 반영되지 않음
+    - Like 페이지 활성화 시점에서 localStorage.getItem 하므로 해당 문제 발생
+    - Detail/ 활성화 시 Likes 페이지를 off 해주도록 하자
+    - localStorage.getItem을 전역변수로 변경하면서 해결
+   
+  - **Pagination Component**
+    - tanstackQuery에서 queryKey에 Recoil value를 포함시켜야 실시간 update됨
+
+
+  - **Up Component**
+  
+  - **Toast Component**
+    - 공통 Component로 제작해 어디서도 Import로 사용할 수 있게
+    - props로 message를 받을 수 있게
+    - useTimeout로 3000ms후 사라지게
+    - Typescript로 늘 받지는 않는 props를 optional하게 설정할 수 있을까?
 
 **최적화**
 
@@ -156,14 +210,19 @@ components/navigation/components/likes/Likes.tsx
   - 반영되지 않은 상태의 Recoil value를 다시 읽기하니까 직전 localStorage로 계속 고정되는 버그가 발생하는듯
   - 직접 localstorage.deleteItem()를 실행해보자
   - Recoil update 해주기
+  - resetRecoilstate()를 통해 default 값인 []로 돌려주기
 
 ## 회고
 
 - Git push 습관들이기
 - 생각을 먼저 하고 코드로 옮기는 습관들이기
-- 개선점을 찾아냈을때, 그리고 생각을 코드로 옮길때 성취감이 좋다.
-- 머리로 코드를 구상하고 그걸 실제로 옮기는 과정이 빨라지면 좋겠다.
+- 무조건적인 최적화가 아닌 비용과 성능 이점을 저울질해서 하기
+- 개선점을 찾아냈을때, 그리고 생각을 코드로 옮길때 성취감이 좋다
+- 머리로 코드를 구상하고 그걸 실제로 옮기는 과정이 빨라지면 좋겠다
+
 
 ## 성취
 
-- Scroll event 발생 시 render 발생. 브라우저 스크롤 위치값 저장에 useRef를 사용해 불필요한 Render 개선.
+- recoilValue와 setRecoilValue, recoilState의 Render Trigger를 고려하여 사용
+- Main Page에서 Scroll event 발생 시 render 발생. 브라우저 스크롤 위치값 저장에 useRef를 사용해 불필요한 Render 개선
+- React.memo() 적용으로 Card Component re-render 개선

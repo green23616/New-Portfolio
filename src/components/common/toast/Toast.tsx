@@ -12,6 +12,9 @@ interface ToastProps {
 
 function Toast({ setToast, message, bottom, result }: ToastProps) {
   useEffect(() => {
+    console.log('Toast Render');
+  });
+  useEffect(() => {
     const timer = setTimeout(() => {
       setToast(false);
     }, 2000);

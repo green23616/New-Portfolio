@@ -8,12 +8,16 @@ import {
   detailState,
   selectedState,
 } from '../../../../../../../store/atoms/detailState';
+import { useEffect } from 'react';
 
 interface CardProps {
   like: Photo;
 }
 
 function Item({ like }: CardProps) {
+  useEffect(() => {
+    console.log('Item Render');
+  });
   const setIsOpen = useSetRecoilState(detailState);
   const setSelected = useSetRecoilState(selectedState);
 

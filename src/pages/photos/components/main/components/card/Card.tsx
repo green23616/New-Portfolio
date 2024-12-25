@@ -8,12 +8,16 @@ import {
   detailState,
   selectedState,
 } from '../../../../../../store/atoms/detailState';
+import React, { useEffect } from 'react';
 
 interface CardProps {
   data: Photo;
 }
 
 function Card({ data }: CardProps) {
+  useEffect(() => {
+    console.log('Main-Card Render');
+  });
   const setIsOpen = useSetRecoilState(detailState);
   const setSelected = useSetRecoilState(selectedState);
 
@@ -29,4 +33,4 @@ function Card({ data }: CardProps) {
   );
 }
 
-export default Card;
+export default React.memo(Card);

@@ -16,8 +16,12 @@ import { detailState } from '../../../../store/atoms/detailState';
 import { searchState } from '../../../../store/atoms/searchState';
 import { bookmarkState } from '../../../../store/atoms/bookmarkState';
 import { pageState } from '../../../../store/atoms/pageState';
+import { useEffect } from 'react';
 
 function Main() {
+  useEffect(() => {
+    console.log('Main Render');
+  });
   const searchValue = useRecoilValue(searchState);
   const isOpen = useRecoilValue(detailState);
   const setBookmarkArr = useSetRecoilState(bookmarkState);
@@ -47,7 +51,7 @@ function Main() {
     },
   });
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isPending, isError, error } = useQuery({
     queryKey: ['photos', searchValue, pageValue],
     queryFn: async () => {
       const res = await API_FETCH.get('', {
@@ -60,12 +64,13 @@ function Main() {
       if (res.status === 200) {
         return res.data;
       }
+      if (isError) {
+        console.log(error)
+      }
     },
     enabled: !!searchValue,
     staleTime: 1000 * 60 * 5,
   });
-
-  console.log(data);
 
   const totalPages = data?.total_pages || null;
 
@@ -84,8 +89,7 @@ function Main() {
       </div>
       <div className={styles.main__main}>
         <div className={styles.main__main__imgContainer}>
-          {isLoading && <p>Loading</p>}
-          {isError && <p>Error</p>}
+          {isPending && <p>Loading</p>}
           {data && data.total === 0 && '검색결과가 존재하지 않습니다'}
           {data &&
             data.results.map((e: Photo) => {

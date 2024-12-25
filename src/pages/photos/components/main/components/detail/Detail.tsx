@@ -15,6 +15,9 @@ import {
 } from '../../../../../../store/atoms/detailState';
 
 function Detail() {
+  useEffect(() => {
+    console.log('Detail Render');
+  });
   const [likes, setLikes] = useState(false);
   const [toast, setToast] = useState(false);
   const [result, setResult] = useState(0);

@@ -5,8 +5,12 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { bookmarkState } from '../../../../../../store/atoms/bookmarkState';
 import { searchState } from '../../../../../../store/atoms/searchState';
 import { pageState } from '../../../../../../store/atoms/pageState';
+import { useEffect } from 'react';
 
 function Bookmarks() {
+  useEffect(() => {
+    console.log('Bookmarks Render');
+  });
   const [bookmarkArr, setBookmarkArr] = useRecoilState(bookmarkState);
   const setSearch = useSetRecoilState(searchState);
   const setPageValue = useSetRecoilState(pageState);

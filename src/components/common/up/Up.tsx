@@ -5,6 +5,9 @@ import styles from './Up.module.scss';
 import throttle from 'lodash/throttle';
 
 function Up() {
+  useEffect(() => {
+    console.log('Up Render');
+  });
   const scrollY = useRef(0);
   const [isY, setIsY] = useState(false);
 

@@ -8,15 +8,18 @@ import Item from './item/Item';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { likeState } from '../../../../../../store/atoms/likeState';
 import { storageState } from '../../../../../../store/atoms/storageState';
+import { useEffect } from 'react';
 
 function Likes() {
+  useEffect(() => {
+    console.log('Likes Render');
+  });
   const setLikePage = useSetRecoilState(likeState);
-  const resetStorage = useResetRecoilState(storageState);
   const localLikes = useRecoilValue(storageState);
+  const resetStorage = useResetRecoilState(storageState);
 
   const handleDelete = () => {
     resetStorage();
-    // localStorage.removeItem('likes')
   };
 
   return (
