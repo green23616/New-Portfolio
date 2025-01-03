@@ -7,6 +7,10 @@
 
   transition: all 0.3s linear;
 
+  border: none;
+
+  background-color: transparent;
+
   cursor: pointer;
 
   &.active {

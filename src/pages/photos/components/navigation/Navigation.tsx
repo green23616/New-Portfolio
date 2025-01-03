@@ -8,12 +8,8 @@ import Search from './components/search/Search.tsx';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { likeState } from '../../../../store/atoms/likeState';
 import { storageState } from '../../../../store/atoms/storageState';
-import { useEffect } from 'react';
 
 function Navigation() {
-  useEffect(() => {
-    console.log('Navigation Render');
-  });
   const [likePage, setLikePage] = useRecoilState(likeState);
   const localLikes = useRecoilValue(storageState);
 

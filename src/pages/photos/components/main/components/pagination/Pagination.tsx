@@ -1,18 +1,15 @@
+import React from 'react';
 // CSS
 import styles from './Pagination.module.scss';
 // Recoil
 import { useRecoilState } from 'recoil';
 import { pageState } from '../../../../../../store/atoms/pageState';
-import { useEffect } from 'react';
 
 interface PaginationProps {
   totalPages: number | null;
 }
 
 function Pagination({ totalPages }: PaginationProps) {
-  useEffect(() => {
-    console.log('Pagination Render');
-  });
   const [pageValue, setPageValue] = useRecoilState(pageState);
 
   const pageGroupSize = 10;
@@ -74,4 +71,4 @@ function Pagination({ totalPages }: PaginationProps) {
   );
 }
 
-export default Pagination;
+export default React.memo(Pagination);

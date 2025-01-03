@@ -15,17 +15,15 @@ import {
 } from '../../../../../../store/atoms/detailState';
 
 function Detail() {
-  useEffect(() => {
-    console.log('Detail Render');
-  });
-  const [likes, setLikes] = useState(false);
-  const [toast, setToast] = useState(false);
-  const [result, setResult] = useState(0);
   const [localLikes, setLocalLikes] =
     useRecoilState<(Photo | null)[]>(storageState);
   const setLikePage = useSetRecoilState(likeState);
   const setIsOpen = useSetRecoilState(detailState);
   const selected = useRecoilValue(selectedState);
+
+  const [likes, setLikes] = useState(false);
+  const [toast, setToast] = useState(false);
+  const [result, setResult] = useState(0);
 
   useEffect(() => {
     const isLiked = localLikes.some(

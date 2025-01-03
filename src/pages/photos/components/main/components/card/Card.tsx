@@ -8,16 +8,13 @@ import {
   detailState,
   selectedState,
 } from '../../../../../../store/atoms/detailState';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 interface CardProps {
   data: Photo;
 }
 
 function Card({ data }: CardProps) {
-  useEffect(() => {
-    console.log('Main-Card Render');
-  });
   const setIsOpen = useSetRecoilState(detailState);
   const setSelected = useSetRecoilState(selectedState);
 

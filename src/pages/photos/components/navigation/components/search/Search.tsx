@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 // CSS
 import styles from './Search.module.scss';
 // Recoil
@@ -7,15 +7,14 @@ import { searchState } from '../../../../../../store/atoms/searchState';
 import { pageState } from '../../../../../../store/atoms/pageState';
 
 function Search() {
-  useEffect(() => {
-    console.log('Search Render');
-  });
+  const setSearch = useSetRecoilState(searchState);
+  const setPageValue = useSetRecoilState(pageState);
+
   const [isActive, setIsActive] = useState(false);
   const [isText, setIstext] = useState(true);
   const [inputValue, setInputValue] = useState('');
+
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const setSearch = useSetRecoilState(searchState);
-  const setPageValue = useSetRecoilState(pageState);
 
   const handleClick = () => {
     setIsActive(prev => !prev);

@@ -16,16 +16,12 @@ import { detailState } from '../../../../store/atoms/detailState';
 import { searchState } from '../../../../store/atoms/searchState';
 import { bookmarkState } from '../../../../store/atoms/bookmarkState';
 import { pageState } from '../../../../store/atoms/pageState';
-import { useEffect } from 'react';
 
 function Main() {
-  useEffect(() => {
-    console.log('Main Render');
-  });
   const searchValue = useRecoilValue(searchState);
+  const pageValue = useRecoilValue(pageState);
   const isOpen = useRecoilValue(detailState);
   const setBookmarkArr = useSetRecoilState(bookmarkState);
-  const pageValue = useRecoilValue(pageState);
 
   const handleClick = () => {
     setBookmarkArr(prev => {
@@ -65,14 +61,14 @@ function Main() {
         return res.data;
       }
       if (isError) {
-        console.log(error)
+        console.log(error);
       }
     },
     enabled: !!searchValue,
     staleTime: 1000 * 60 * 5,
   });
 
-  const totalPages = data?.total_pages || null;
+  const totalPages = data?.total_pages;
 
   return (
     <main className={styles.main}>

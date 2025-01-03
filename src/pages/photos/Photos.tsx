@@ -7,13 +7,8 @@ import Navigation from './components/navigation/Navigation';
 import { useSetRecoilState } from 'recoil';
 import { searchState } from '../../store/atoms/searchState';
 import { pageState } from '../../store/atoms/pageState';
-import { useEffect } from 'react';
 
 function Photos() {
-  useEffect(() => {
-    console.log('Photos Render');
-  });
-
   const setSearch = useSetRecoilState(searchState);
   const setPageValue = useSetRecoilState(pageState);
 
@@ -30,7 +25,7 @@ function Photos() {
       <Navigation />
       <Main />
       <footer className={styles.photos__footer}>
-        <h4>Original Design, Code by JW 2024</h4>
+        <h4>Original Design and Code by JWK 2024</h4>
       </footer>
     </div>
   );

@@ -8,12 +8,9 @@ import Item from './item/Item';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { likeState } from '../../../../../../store/atoms/likeState';
 import { storageState } from '../../../../../../store/atoms/storageState';
-import { useEffect } from 'react';
+import React from 'react';
 
 function Likes() {
-  useEffect(() => {
-    console.log('Likes Render');
-  });
   const setLikePage = useSetRecoilState(likeState);
   const localLikes = useRecoilValue(storageState);
   const resetStorage = useResetRecoilState(storageState);
@@ -60,4 +57,4 @@ function Likes() {
   );
 }
 
-export default Likes;
+export default React.memo(Likes);
